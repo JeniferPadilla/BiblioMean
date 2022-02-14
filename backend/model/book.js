@@ -9,7 +9,7 @@ const bookSchema= new mongoose.Schema({
     description:String,
     quantity:Number,
     deliveryDate:Date,
-    rol:{type:mongoose.Schema.ObjectId,ref:"roles"},
+    user:{type:mongoose.Schema.ObjectId,ref:"users"},
     registerDate:{type:Date, default:Date.now},
     dbStatus:Boolean,
 

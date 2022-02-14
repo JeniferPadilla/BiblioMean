@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     phone: String,
     role: {type: mongoose.Schema.ObjectId,ref: "roles"},
     registerDate:{type:Date, default:Date.now},
-    debStatus:true,
+    debStatus:Boolean,
 });
 
 const user = mongoose.model("users", userSchema);

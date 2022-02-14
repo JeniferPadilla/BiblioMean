@@ -3,7 +3,7 @@ import book from "../model/book.js"
 const registerBook = async (req, res)=>{
 
     if (!req.body.title || !req.body.author || !req.body.editorial || !req.body.category || !req.body. description || !req.body.quantity ||!req.body.deliveryDate)
-    return res.status(400).send({message:"Imcomplete date"});
+    return res.status(400).send({message:"Incomplete data"});
 
     let schemaBook = new book({
     title:req.body.title,

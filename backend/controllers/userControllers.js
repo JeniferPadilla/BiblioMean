@@ -54,11 +54,10 @@ const login = async (req, res) =>{
 
     const userLogin = await user.findOne({ email: req.body.email });
     if (!userLogin)
-        return res.status(400).send({ message: "Email no found" });
+        return res.status(400).send({ message: "Email no found" }); // verificar email
 
-console.log(userLogin);
     if (!userLogin.dbStatus)
-        return res.status(400).send({ message: "User no found" });
+        return res.status(400).send({ message: "User no found" });// verificar dbStatus
 
     const passhash = await bcrypt.compare(req.body.password, userLogin.password);
 

@@ -10,6 +10,8 @@ userMidd.existingUser,
 roleMidd.existingRole,
 userController.registerUser);
 
-router.get("/listUser/:name?", userController.listUser);
+router.get("/listUser", userController.listUser);
+router.post("/login", userController.login);
+
 
 export default router;

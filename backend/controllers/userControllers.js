@@ -50,5 +50,36 @@ const listUser = async (req,res)=>{
 //la funcion para hacer filtros find( aqui va una expresion regular:osea que acepta tpodo el RegExp)
 };
 
+const login = async (req, res) =>{
 
-export default { registerUser, listUser};
+    const userLogin = await user.findOne({ email: req.body.email });
+    if (!userLogin)
+        return res.status(400).send({ message: "Email no found" });
+
+console.log(userLogin);
+    if (!userLogin.dbStatus)
+        return res.status(400).send({ message: "User no found" });
+
+    const passhash = await bcrypt.compare(req.body.password, userLogin.password);
+
+    if (!passhash)
+        return res.status(400).send({ message: "password no found" });
+
+    try {
+        return res.status(200).json({
+            token: jwt.sign({
+                _id: userLogin._id,
+                name: userLogin.name,
+                role: userLogin.role,
+                iat: moment().unix() //para generar la fecha de ingreso, el moment para encriptar la fecha
+            },
+                process.env.SK_JWT
+            ),
+        });
+    } catch (e) {
+        return res.status(500).send({ message: "Register error" });
+    }
+};
+
+
+export default { registerUser, listUser, login};

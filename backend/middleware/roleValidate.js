@@ -12,4 +12,4 @@ const existingRole = async(req,res,next)=>{
     next();
 };
 
-export default {existingRole}
+export default {existingRole};

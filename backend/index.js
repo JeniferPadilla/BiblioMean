@@ -16,4 +16,4 @@ app.use ("/api/books", bookRouter );
 app.use("/api/users", userRouter );
 app.listen(process.env.PORT,()=>console.log("Backend server running on port: ",process.env.PORT));
 
-db.dbConnection()
+db.dbConnection();

@@ -13,7 +13,21 @@ const registerRole = async (req, res) => {
 
   if (!resul)
     return res.status(500).send({ message: "Error to register role" });
-  res.status(200).send({ resul });
+    
+    try {
+      return res.status(200).json({    //se pone .json para los jsonwebtoken
+          token: jwt.sign({           //asi se crea el jsonwebtoken jwt
+          _id: resul._id,
+          name: resul.name,
+          description:resul.description,       //aqui se hace una copia de la db
+          iat: moment().unix()              //para generar la fecha de ingreso, el moment para encriptar la fecha
+          },
+          process.env.SK_JWT
+          ),
+      });
+  } catch (e) {
+return res.status(500).send({message: "Register error"});
+  }
 };
 
 const consultRole = async(req, res)=>{

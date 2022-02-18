@@ -25,7 +25,23 @@ const registerBook = async (req, res)=>{
     let result = await schemaBook.save();
 
     if(!result) return res.status(500).send({message:"Error to register book"});
-    res.status(200).send({result});
+
+    try {
+        return res.status(200).json({    //se pone .json para los jsonwebtoken
+            token: jwt.sign({           //asi se crea el jsonwebtoken jwt
+            _id: result._id,
+            title: result.title,         //aqui se hace una copia de la db
+            author: result.author,
+            editorial:result.editorial,
+            // role: result.role,        //se ponen los nombres como estan en la db osea com esta en model
+            iat: moment().unix()              //para generar la fecha de ingreso, el moment para encriptar la fecha
+            },
+            process.env.SK_JWT
+            ),
+        });
+    } catch (e) {
+return res.status(500).send({message: "Register error"});
+    }
 };
 
 const consultBook = async(req, res)=>{

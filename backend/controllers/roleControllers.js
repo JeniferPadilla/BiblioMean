@@ -19,7 +19,7 @@ const registerRole = async (req, res) => {
 const consultRole = async(req, res)=>{
 
   try {
-      const consult = await role.find();
+      let consult = await role.find();
       if(!consult) return res.status(500).send({message:"Error to register role"});
       res.status(200).send({consult});
   } catch (error) {
@@ -27,4 +27,4 @@ const consultRole = async(req, res)=>{
   }
 };
 
-export default { registerRole,consultRole };
+export default { registerRole, consultRole };

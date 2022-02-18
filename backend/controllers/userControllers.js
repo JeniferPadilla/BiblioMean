@@ -1,30 +1,21 @@
 import user from "../model/user.js";
-import role from "../model/role.js"
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import moment from "moment";
 
 const registerUser = async(req, res)=>{
 
-    if (!req.body.name || !req.body.email || !req.body.password || !req.body.phone)
+    if (!req.body.name || !req.body.password || !req.body.phone)
     return res.status(400).send({message: "Incomplete data"});
-
-    const existingUser = await user.findOne({email: req.body.email});
-
-    if (existingUser) return res.status(400).send({message: "the user is already registered"});
 
     const passHash = await bcrypt.hash(req.body.password, 10);
 
-    const roleId = await role.findOne({
-        name: "user"})
-        if(!roleId) return res.status(500).send({message: "no role was assigned"})
-    
     const schemaUser = new user({
         name: req.body.name,
         email:req.body.email,
         password:passHash,
         phone: req.body.phone,
-        role: roleId._id,
+        role: req.body.role,
         dbStatus:true,
     });
     const result= await schemaUser.save();
@@ -47,4 +38,17 @@ const registerUser = async(req, res)=>{
     }
 };
 
-export default { registerUser};
+
+const listUser = async (req,res)=>{
+    let users= await user
+    .find({ name: new RegExp(req.params["name"])})
+    .populate("role")
+    .exec();  //para traer la lista de todos- users es un array, el populate es para indicar algo exacto para mostrar
+    if (users.length == 0)
+    return res.status(400).send({message:"No search results"});
+    return res.status(200).send ({users});
+//la funcion para hacer filtros find( aqui va una expresion regular:osea que acepta tpodo el RegExp)
+};
+
+
+export default { registerUser, listUser};

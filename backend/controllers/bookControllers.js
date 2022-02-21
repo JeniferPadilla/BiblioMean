@@ -20,6 +20,7 @@ const registerBook = async (req, res)=>{
     description:req.body.description,
     quantity:req.body.quantity,
     deliveryDate:req.body.deliveryDate,
+    user:req.body.user,
     dbStatus:true,
     });
     let result = await schemaBook.save();
@@ -33,6 +34,7 @@ const registerBook = async (req, res)=>{
             title: result.title,         //aqui se hace una copia de la db
             author: result.author,
             editorial:result.editorial,
+            user:result.user,
             // role: result.role,        //se ponen los nombres como estan en la db osea com esta en model
             iat: moment().unix()              //para generar la fecha de ingreso, el moment para encriptar la fecha
             },
@@ -46,10 +48,51 @@ return res.status(500).send({message: "Register error"});
 
 const consultBook = async(req, res)=>{
 
-        let books = await book.find({name: new RegExp(req.params["name"])});
+        let books = await book
+        .find({name: new RegExp(req.params["name"])});
         if(books.length==0) 
         return res.status(500).send({message:"no search results"});
        return res.status(200).send({books});
-    };
+};
 
-export default{registerBook, consultBook};
+const listBook = async(req, res)=>{
+
+    let books = await book
+    .find({name: new RegExp(req.params["name"])});
+    if(books.length==0) 
+    return res.status(500).send({message:"no search results"});
+   return res.status(200).send({books});
+};
+
+const deleteBook = async(req, res)=>{
+    if(!req.params["_id"])
+    return res.status(400).send({message:"Incomplete data"});
+
+    const books =await user.findByIdAndUpdate(req.params["_id"], {dbStatus: false,})
+   
+    return !books
+    ? res.status(400).send({message:"Error deliting book"})
+    : res.status(200).send({message:"Book delete"})
+};
+
+const updateBook = async(req, res)=>{
+
+    if (!req.body._id ||!req.body.title || !req.body.author  || !req.body.category || !req.body.description || !req.body.quantity ||!req.body.deliveryDate)
+    return res.status(400).send({message:"Incomplete data"});
+
+    const editBook = await book.findByIdAndUpdate(req.body._id,{
+        
+        title: req.body.title,
+        author: req.body.author,
+        category: req.body.category,
+        description:req.body.description,
+        quantity:req.body.quantity,
+        deliveryDate:req.body.deliveryDate,
+        user:req.body.user,
+    });
+    if (!editBook)return res.status(500).send({message:"Error editing book "})
+    return res.status(200).send({message:"book update"});
+};
+
+
+export default{registerBook, consultBook, listBook,deleteBook,updateBook};

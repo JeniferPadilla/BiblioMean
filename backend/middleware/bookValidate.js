@@ -1,5 +1,5 @@
 import book from "../model/book.js";
-import user from "../model/user.js";
+
 
 const existingBook  = async (req,res,next) =>{
 
@@ -12,16 +12,4 @@ const existingBook  = async (req,res,next) =>{
     next();
 };
 
-const existingUser = async(req,res,next)=>{
-
-    const userId = await user.findOne({
-        name: "meresito"})
-        if(!userId) return res.status(500).
-        send({message: "no book was assigned"})
-    
-    req.body.user = userId._id;
-
-    next();
-};
-
-export default {existingBook, existingUser};
+export default {existingBook};

@@ -13,7 +13,7 @@ const registerRole = async (req, res) => {
 
   if (!resul)
     return res.status(500).send({ message: "Error to register role" });
-    
+  
     try {
       return res.status(200).json({    //se pone .json para los jsonwebtoken
           token: jwt.sign({           //asi se crea el jsonwebtoken jwt
@@ -41,4 +41,30 @@ const consultRole = async(req, res)=>{
   }
 };
 
-export default { registerRole, consultRole };
+const deleteRol = async(req, res)=>{
+  if(!req.params["_id"])
+  return res.status(400).send({message:"Incomplete data"});
+
+  const roles =await role.findByIdAndUpdate(req.params["_id"], {dbStatus: false,})
+ 
+  return !roles
+  ? res.status(400).send({message:"Error deliting user"})
+  : res.status(200).send({message:"User delete"})
+};
+
+const updateRole = async(req, res)=>{
+
+  if (!req.body._id || !req.body.name || !req.body.description)
+  return res.status(400).send({message:"Incomplete data"});
+
+  const editRole = await role.findByIdAndUpdate(req.body._id,{
+      name: req.body.name,
+      description: req.body.description,
+  });
+  if (!editRole)
+  return res.status(500).send({message:"Error editing user "})
+  return res.status(200).send({message:"user update"});
+};
+
+
+export default { registerRole, consultRole, deleteRol, updateRole};

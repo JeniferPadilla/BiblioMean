@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 const registerBook = async (req, res)=>{
 
-    if (!req.body.title || !req.body.author  || !req.body.category || !req.body. description || !req.body.quantity ||!req.body.deliveryDate)
+    if (!req.body.title || !req.body.author  || !req.body.category || !req.body. description || !req.body.quantity ||!req.body.deliveryDate || !req.body._id )
     return res.status(400).send({message:"Incomplete data"});
 
     const existingUser = await user.findOne({email: req.body.email});
@@ -21,6 +21,7 @@ const registerBook = async (req, res)=>{
     quantity:req.body.quantity,
     deliveryDate:req.body.deliveryDate,
     user:req.body.user,
+    // user_id :req.body.user._id,
     dbStatus:true,
     });
     let result = await schemaBook.save();
@@ -31,6 +32,7 @@ const registerBook = async (req, res)=>{
         return res.status(200).json({    //se pone .json para los jsonwebtoken
             token: jwt.sign({           //asi se crea el jsonwebtoken jwt
             _id: result._id,
+            user_id: result._id,
             title: result.title,         //aqui se hace una copia de la db
             author: result.author,
             editorial:result.editorial,
@@ -48,28 +50,27 @@ return res.status(500).send({message: "Register error"});
 
 const consultBook = async(req, res)=>{
 
-        let books = await book
-        .find({name: new RegExp(req.params["name"])});
-        if(books.length==0) 
+        let books = await book.find({name: new RegExp(req.params["name"])});
+        if(books.length==0)
         return res.status(500).send({message:"no search results"});
        return res.status(200).send({books});
 };
 
-const listBook = async(req, res)=>{
+const listBookUser = async(req, res)=>{
+    let books = await book.find({user: (req.params["_id"])});
 
-    let books = await book
-    .find({name: new RegExp(req.params["name"])});
-    if(books.length==0) 
+    if(books.length==0)
     return res.status(500).send({message:"no search results"});
    return res.status(200).send({books});
 };
 
 const deleteBook = async(req, res)=>{
+
     if(!req.params["_id"])
     return res.status(400).send({message:"Incomplete data"});
 
     const books =await book.findByIdAndUpdate(req.params["_id"], {dbStatus: false,})
-   
+
     return !books
     ? res.status(400).send({message:"Error deliting book"})
     : res.status(200).send({message:"Book delete"})
@@ -81,7 +82,7 @@ const updateBook = async(req, res)=>{
     return res.status(400).send({message:"Incomplete data"});
 
     const editBook = await book.findByIdAndUpdate(req.body._id,{
-        
+
         title: req.body.title,
         author: req.body.author,
         category: req.body.category,
@@ -91,8 +92,13 @@ const updateBook = async(req, res)=>{
         user:req.body.user,
     });
     if (!editBook)return res.status(500).send({message:"Error editing book "})
-    return res.status(200).send({message:"book update"});
+    return res.status(200).send({message:"Book update"});
 };
 
 
-export default{registerBook, consultBook, listBook,deleteBook,updateBook};
+export default{
+    registerBook,
+    consultBook,
+    listBookUser,
+    deleteBook,
+    updateBook};

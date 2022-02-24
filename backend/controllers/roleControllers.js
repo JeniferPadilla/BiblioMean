@@ -42,14 +42,15 @@ const consultRole = async(req, res)=>{
 };
 
 const deleteRol = async(req, res)=>{
+  
   if(!req.params["_id"])
   return res.status(400).send({message:"Incomplete data"});
 
   const roles =await role.findByIdAndUpdate(req.params["_id"], {dbStatus: false,})
- 
+
   return !roles
-  ? res.status(400).send({message:"Error deliting user"})
-  : res.status(200).send({message:"User delete"})
+  ? res.status(400).send({message:"Error deliting role"})
+  : res.status(200).send({message:"Role delete"})
 };
 
 const updateRole = async(req, res)=>{
@@ -62,8 +63,8 @@ const updateRole = async(req, res)=>{
       description: req.body.description,
   });
   if (!editRole)
-  return res.status(500).send({message:"Error editing user "})
-  return res.status(200).send({message:"user update"});
+  return res.status(500).send({message:"Error editing role "})
+  return res.status(200).send({message:"Role update"});
 };
 
 

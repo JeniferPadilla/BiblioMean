@@ -11,6 +11,7 @@ roleMidd.existingRole,
 userController.registerUser);
 
 router.get("/listUser", userController.listUser);
+router.get("/listAdmin", userController.listAdmin);
 router.post("/login", userController.login);
 router.put("/delete/:_id", userController.deleteUser);
 router.put("/updateUserAdmin", userController.updateUserAdmin);

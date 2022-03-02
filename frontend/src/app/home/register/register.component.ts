@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
           this._router.navigate(['/saveBook'])
           this.message= 'Registro de usuario exitoso'
           this.openSnackBarSuccesfull();
-          this.registerData={};
+        
         },
         error: (e) => {
           this.message= e.error.message

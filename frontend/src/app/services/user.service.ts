@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient  } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -14,6 +14,6 @@ export class UserService {
    }
   registerUser(user:any){
 return this._http.post<any>
-(this.env + '/userControllers/register', user);
+(this.env + 'users/registerUser', user);
   }
 }

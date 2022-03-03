@@ -5,21 +5,15 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-
+export class ListBookService {
+  
   private env: string;
 
   constructor(private _http:HttpClient) {
     this.env=environment.APP_URL;
    }
-  registerUser(user:any){
-return this._http.post<any>
-(this.env + 'users/registerUser', user);
-  }
-
-  login(user:any){      //http://localhost:3001/api
-    return this._http.post<any>
-    (this.env + 'users/login',user);
-  }
-
+   listBook(){
+    return this._http.get<any>
+    (this.env + 'books/listBook');
+   }
 }

@@ -1,0 +1,22 @@
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 16px 0px;
+    text-align: center;
+}
+.card{
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.button{
+    width: 100%;
+    background-color: #d0ee27;
+    color: black;
+}

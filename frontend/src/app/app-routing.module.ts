@@ -11,58 +11,66 @@ import { SaveBookComponent } from './board/save-book/save-book.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
 
-const routes: Routes = [
+import { AuthGuard } from './guard/auth.guard';
 
+const routes: Routes = [
   {
-    path:'',
-    component:LoginComponent,
-    pathMatch:'full',
+    path: '',
+    component: LoginComponent,
+    pathMatch: 'full',
   },
   {
-    path:'listBook',
-    component:ListBookComponent,
+    path: 'listBook',
+    component: ListBookComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path:'saveBook',
+    path: 'saveBook',
     component: SaveBookComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path:'login',
-    component:LoginComponent,
+    path: 'login',
+    component: LoginComponent,
   },
   {
-    path:'signUp',
-    component:RegisterComponent,
+    path: 'signUp',
+    component: RegisterComponent,
   },
   {
-    path:'listUser',
-    component:ListUserComponent,
+    path: 'listUser',
+    component: ListUserComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'registerUser',
-    component:RegisterUserComponent,
+    component: RegisterUserComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path:'updateUser',
-    component:UpdateUserComponent,
+    path: 'updateUser',
+    component: UpdateUserComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path:'registerRole',
-    component:RegisterRoleComponent,
+    path: 'registerRole',
+    component: RegisterRoleComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'listRole',
     component: ListRoleComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path:'updateRole',
-    component:UpdateRoleComponent,
+    path: 'updateRole',
+    component: UpdateRoleComponent,
+    canActivate: [AuthGuard],
   },
-  
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

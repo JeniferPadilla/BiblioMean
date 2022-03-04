@@ -22,4 +22,15 @@ return this._http.post<any>
     (this.env + 'users/login',user);
   }
 
+  loggedIn() {
+    return !!localStorage.getItem('token'); //sirve para recibir un true o false, reemplaza la funcion alternario y la funcion if-if else
+  }
+  getToken() {
+    return localStorage.getItem('token'); //para capturar un token, cuando se hace un registro de usuario
+  }
+
+  logout(){
+    localStorage.removeItem('token'); //elimina el token y ya.
+  }
+
 }

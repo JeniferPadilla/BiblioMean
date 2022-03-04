@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 export class ListBookComponent implements OnInit {
 
   book:any;
-  cantBook=0;
   message: string = '';
+  cantBook=1;
 
   constructor(
     private _listBook: ListBookService,
@@ -26,8 +26,7 @@ export class ListBookComponent implements OnInit {
 
         next: (v) => {
           localStorage.setItem('token', v.token)
-          this._router.navigate(['/saveBook'])
-          this.message= 'Registro de usuario exitoso'
+          this.book = v.books
           // console.log(v);
         },
       })
@@ -35,7 +34,7 @@ export class ListBookComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
+    this.ListBook();
   }
 
 }

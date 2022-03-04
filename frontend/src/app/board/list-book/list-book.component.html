@@ -4,17 +4,21 @@
     <thead>
       <tr>
         <th scope="col">#</th>
+        <th scope="col">Id</th>
         <th scope="col">Titulo</th>
+        <th scope="col">Autor</th>
         <th scope="col">Editorial</th>
         <th scope="col">Categoria</th>
-        <th scope="col">Fecha Creado</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Fecha Actual</th>
         <th scope="col">Estado</th>
 
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let book of book">
-        <th style="text-align:center"  scope="row">{{book._id}}</th>
+      <tr *ngFor="let book of book let cantBook=index ">
+        <th style="text-align:center"  scope="row">{{cantBook+1}}</th>
         <td>{{book.title}}</td>
         <td>{{book.author}}</td>
         <td>{{book.editorial}}</td>

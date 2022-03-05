@@ -25,8 +25,7 @@ export class ListBookComponent implements OnInit {
       this._listBook.listBook().subscribe({
 
         next: (v) => {
-          localStorage.setItem('token', v.token)
-          this.book = v.books
+           this.book = v.books
           // console.log(v);
         },
       })

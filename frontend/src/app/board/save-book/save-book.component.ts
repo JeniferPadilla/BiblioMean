@@ -41,7 +41,7 @@ export class SaveBookComponent implements OnInit {
       this.openSnackBarError();
       this.registerBookData = {};
     } else {
-      this._bookService.saveBook(this.saveBook).subscribe({
+      this._bookService.saveBook(this.registerBookData).subscribe({
         next: (v) => {
           
           this._router.navigate(['/listBook']);

@@ -10,15 +10,14 @@ const registerBook = async (req, res) => {
     !req.body.category ||
     !req.body.description ||
     !req.body.quantity ||
-    !req.body.deliveryDate ||
-    !req.body._id
+    !req.body.deliveryDate
   )
     return res.status(400).send({ message: "Incomplete data" });
 
-  const existingUser = await user.findOne({ email: req.body.email });
+  // const existingUser = await user.findOne({ email: req.body.email });
 
-  if (existingUser)
-    return res.status(400).send({ message: "the user is already registered" });
+  // if (existingUser)
+  //   return res.status(400).send({ message: "the user is already registered" });
 
   let schemaBook = new book({
     title: req.body.title,
@@ -28,9 +27,12 @@ const registerBook = async (req, res) => {
     description: req.body.description,
     quantity: req.body.quantity,
     deliveryDate: req.body.deliveryDate,
-    user: req.body.user,
+    user: req.user._id,
     dbStatus: true,
+    
   });
+
+  console.log(schemaBook);
   let result = await schemaBook.save();
 
   if (!result)

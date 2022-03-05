@@ -1,10 +1,12 @@
 import express from "express";
 import bookController from "../controllers/bookControllers.js";
 import userIdMidd from "../middleware/idBookValidate.js";
-
+// import auth from "../package.json/auth";
+import auth from '../middleware/auth.js';
 const router = express.Router();
 
 router.post("/registerBook",
+auth,
 userIdMidd.existingUser,
 userIdMidd.existingBook,
 bookController.registerBook);

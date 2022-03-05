@@ -60,9 +60,6 @@ export class LoginComponent implements OnInit {
       panelClass:['styleSnackBarError'],
     });
   }
-
-
-
   ngOnInit(): void {
   }
 

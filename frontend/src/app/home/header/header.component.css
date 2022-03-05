@@ -9,7 +9,7 @@ p{
 
 .bgHeader{
     background-color: #da508a;
-    height: 15%;
+    height: 11%;
 }
 
 ul{
@@ -23,4 +23,7 @@ a:hover {
     color: #e2fa0e;
     transition: 0.4s;
   }
-  
+a{
+    font-size: 140%;
+    font-family:'Times New Roman', Times, serif;
+}

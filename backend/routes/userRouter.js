@@ -3,6 +3,7 @@ import userController from "../controllers/userControllers.js";
 import userMidd from "../middleware/userValidate.js";
 import roleMidd from  "../middleware/roleValidate.js";
 
+
 const router = express.Router();
 
 router.post("/registerUser",
@@ -12,7 +13,7 @@ userController.registerUser);
 
 router.get("/listUser", userController.listUser);
 router.get("/listAdmin", userController.listAdmin);
-router.post("/login", userController.login);
+router.post("/login",userController.login);
 router.put("/delete/:_id", userController.deleteUser);
 router.put("/updateUserAdmin", userController.updateUserAdmin);
 

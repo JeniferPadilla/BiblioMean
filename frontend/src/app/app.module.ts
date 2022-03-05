@@ -15,7 +15,7 @@ import { UpdateUserComponent } from './admin/update-user/update-user.component';
 import { RegisterRoleComponent } from './admin/register-role/register-role.component';
 import { ListRoleComponent } from './admin/list-role/list-role.component';
 import { UpdateRoleComponent } from './admin/update-role/update-role.component';
-
+import { ListBookService } from './services/list-book.service';
 import { BookService } from './services/book.service';
 import { RoleService } from './services/role.service';
 import { UserService } from './services/user.service';
@@ -23,16 +23,15 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AuthGuard } from './guard/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -49,7 +48,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     RegisterRoleComponent,
     ListRoleComponent,
     UpdateRoleComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -65,7 +63,18 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatInputModule,
     MatSnackBarModule,
   ],
-  providers: [ BookService, RoleService, UserService,TokenInterceptorService, AuthGuard  ],
-  bootstrap: [AppComponent]
+  providers: [
+    BookService,
+    RoleService,
+    UserService,
+    ListBookService,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptorService,
+      multi:true,
+    },
+    AuthGuard,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

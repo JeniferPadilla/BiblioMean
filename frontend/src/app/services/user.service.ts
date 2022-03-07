@@ -19,13 +19,12 @@ export class UserService {
     return this._http.post<any>(this.env + 'users/login', user);
   }
   loggedIn() {
-    return !!localStorage.getItem('token'); //sirve para recibir un true o false, reemplaza la funcion alternario y la funcion if-if else
+    return !!localStorage.getItem('token');
   }
   getToken() {
-    return localStorage.getItem('token'); //para capturar un token, cuando se hace un registro de usuario
+    return localStorage.getItem('token');
   }
-
   logout() {
-    localStorage.removeItem('token'); //elimina el token y ya.
+    localStorage.removeItem('token');
   }
 }

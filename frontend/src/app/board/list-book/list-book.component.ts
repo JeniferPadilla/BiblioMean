@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ListBookService } from '../../services/list-book.service';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +16,6 @@ export class ListBookComponent implements OnInit {
 
   constructor(
     private _listBook: ListBookService,
-    private _router: Router,
     ) {
     }
 

@@ -10,42 +10,35 @@ import {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   loginData: any;
   message: string = '';
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   durationInSeconds: number = 2000;
 
-
   constructor(
-    //el constructor se encarga de ejecutar lo que esta adentro antes de que el compo aparezca,ejecuta antes de que salga ej el formulario.
-    private _userService: UserService, // se recomienda que las variables sean private y con _ asi guion bajo
+    private _userService: UserService,
     private _router: Router,
     private _snackBar: MatSnackBar
   ) {
-    this.loginData = {}; //es un objeto tipo json vacio,luego al ingrsar los datos se llena
+    this.loginData = {};
   }
-  
+
   login() {
-    if (
-      !this.loginData.email ||
-      !this.loginData.password
-    ) {
+    if (!this.loginData.email || !this.loginData.password) {
       this.message = 'Incomplete data';
       this.openSnackBarError();
     } else {
-      this._userService.login(this.loginData)
-      .subscribe({
+      this._userService.login(this.loginData).subscribe({
         next: (v) => {
           localStorage.setItem('token', v.token);
           this._router.navigate(['/listBook']);
         },
         error: (e) => {
-          this.message= e.error.message
+          this.message = e.error.message;
           this.openSnackBarError();
         },
       });
@@ -53,14 +46,12 @@ export class LoginComponent implements OnInit {
   }
 
   openSnackBarError() {
-   this._snackBar.open(this.message, 'X', {
-     horizontalPosition: this.horizontalPosition,
+    this._snackBar.open(this.message, 'X', {
+      horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       duration: this.durationInSeconds,
-      panelClass:['styleSnackBarError'],
+      panelClass: ['styleSnackBarError'],
     });
   }
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

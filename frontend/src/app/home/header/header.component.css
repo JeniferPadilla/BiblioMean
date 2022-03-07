@@ -1,29 +1,29 @@
-.headerSpacer{
-    flex: 1 1 auto;
+.headerSpacer {
+  flex: 1 1 auto;
 }
 
-p{
-    font-size: 50px;
-    color: #8a2be2;
+p {
+  font-size: 50px;
+  color: #8a2be2;
 }
 
-.bgHeader{
-    background-color: #da508a;
-    height: 11%;
+.bgHeader {
+  background-color: #da508a;
+  height: 11%;
 }
 
-ul{
-    margin: auto;
+ul {
+  margin: auto;
 }
-a{
-    text-decoration: none;
-    color: #252121;
+a {
+  text-decoration: none;
+  color: #252121;
 }
 a:hover {
-    color: #e2fa0e;
-    transition: 0.4s;
-  }
-a{
-    font-size: 140%;
-    font-family:'Times New Roman', Times, serif;
+  color: #e2fa0e;
+  transition: 0.4s;
+}
+a {
+  font-size: 140%;
+  font-family: "Times New Roman", Times, serif;
 }

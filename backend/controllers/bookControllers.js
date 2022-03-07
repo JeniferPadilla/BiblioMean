@@ -1,7 +1,4 @@
 import book from "../model/book.js";
-import user from "../model/user.js";
-import moment from "moment";
-import jwt from "jsonwebtoken";
 
 const registerBook = async (req, res) => {
   if (
@@ -14,12 +11,7 @@ const registerBook = async (req, res) => {
   )
     return res.status(400).send({ message: "Incomplete data" });
 
-  // const existingUser = await user.findOne({ email: req.body.email });
-
-  // if (existingUser)
-  //   return res.status(400).send({ message: "the user is already registered" });
-
-  let schemaBook = new book({
+  const schemaBook = new book({
     title: req.body.title,
     author: req.body.author,
     editorial: req.body.editorial,
@@ -29,36 +21,12 @@ const registerBook = async (req, res) => {
     deliveryDate: req.body.deliveryDate,
     user: req.user._id,
     dbStatus: true,
-    
   });
+    const result = await schemaBook.save();
 
-  console.log(schemaBook);
-  let result = await schemaBook.save();
-
-  if (!result)
-    return res.status(500).send({ message: "Error to register book" });
-
-  try {
-    return res.status(200).json({
-      //se pone .json para los jsonwebtoken
-      token: jwt.sign(
-        {
-          //asi se crea el jsonwebtoken jwt
-          _id: result._id,
-          user_id: result._id,
-          title: result.title, //aqui se hace una copia de la db
-          author: result.author,
-          editorial: result.editorial,
-          user: result.user,
-          // role: result.role,        //se ponen los nombres como estan en la db osea com esta en model
-          iat: moment().unix(), //para generar la fecha de ingreso, el moment para encriptar la fecha
-        },
-        process.env.SK_JWT
-      ),
-    });
-  } catch (e) {
-    return res.status(500).send({ message: "Register error" });
-  }
+  return !result
+    ? res.status(500).send({ message: "Error to register book" })
+    : res.status(200).send({ result });
 };
 
 const consultBook = async (req, res) => {

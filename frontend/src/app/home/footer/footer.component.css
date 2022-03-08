@@ -6,6 +6,9 @@ footer{
   background-color: #e4d2eb;
     color: #070707;
     position: absolute;
+    bottom: 0;
+    align-self: flex-end;
     width: 100%;
-    bottom: 0px;
+    text-align: center;
+
 }

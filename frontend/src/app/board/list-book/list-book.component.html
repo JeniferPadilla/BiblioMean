@@ -1,4 +1,4 @@
-<br>
+<!-- <br>
 <div class="container">
  <h1 >TODOS LOS LIBROS</h1>
  <table class="table">
@@ -27,10 +27,73 @@
         <td>{{book.quantity}}</td>
         <td>{{book.deliveryDate}}</td>
         <td>{{book.dbStatus}}</td>
-        <td><a><img src="https://cdn-icons-png.flaticon.com/512/1040/1040252.png" width="25" height="25"></a></td>
-        <td><a href=""><img src="https://cdn-icons-png.flaticon.com/512/1345/1345874.png" width="25" height="25"></a></td>
+        <td><a><img src="https://cdn-icons-png.flaticon.com/512/1040/1040252.png" width="22" height="22"></a></td>
+        <td><a href=""><img src="https://cdn-icons-png.flaticon.com/512/1345/1345874.png" width="22" height="22"></a></td>
       </tr>
     </tbody>
  </table>
 </div>
+ -->
 
+ <div class="accordion_display">
+  <div class="accordion_size">
+    <mat-accordion  multi="true" *ngIf="bookData.length">
+      <mat-expansion-panel *ngFor="let book of bookData">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span>{{book.title}}</span>
+            <span class="spacer"></span>
+            <button
+              class="btnDisponible"
+              *ngIf="book.dbStatus == 'true'"
+              mat-raised-button
+              >{{ book.dbStatus }}</button>
+            <button
+              class="btnNoDisponible"
+              *ngIf="book.dbStatus == 'false' "
+              mat-raised-button
+            >{{ book.dbStatus }}</button>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-panel-description>
+         Autor: {{book.author}}
+        </mat-panel-description>
+        <mat-panel-description>
+         Editorial: {{book.editorial}}
+        </mat-panel-description>
+        <mat-panel-description>
+          Categoria: {{book.category}}
+        </mat-panel-description>
+        <mat-panel-description>
+         Descripcion: {{book.description}}
+        </mat-panel-description>
+        <mat-panel-description>
+          Cantidad: {{book.quantity}}
+        </mat-panel-description>
+        <mat-panel-description>
+        Creacion del libro: {{book.deliveryDate}}
+        </mat-panel-description>
+          <mat-action-row>
+            <button
+            class="btnDisponible"
+            mat-raised-button
+            (click)="updateBook(book, 'true')"
+          >
+           Disponible
+          </button>
+          <button
+          class="btnNoDisponible"
+          mat-raised-button
+          (click)="updateBook(book, 'false')"
+        >
+       No Disponible
+        </button>
+      <span class="spacer"></span>
+      <mat-icon color="primary"
+       (click)="deleteBook(book)">
+       delete</mat-icon>
+          </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

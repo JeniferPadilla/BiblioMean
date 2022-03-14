@@ -1,9 +1,9 @@
 p{
-    font-size: 30px;
+    font-size: 20px;
     color: #5fe22b;
 }
 footer{
-  background-color: #e4d2eb;
+  background-color: #da508a;
     color: #070707;
     position: absolute;
     bottom: 0;
@@ -12,3 +12,8 @@ footer{
     text-align: center;
 
 }
+.text-muted {
+      color: #080808!important;
+      
+  }
+  

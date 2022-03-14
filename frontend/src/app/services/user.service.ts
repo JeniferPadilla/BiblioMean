@@ -27,4 +27,8 @@ export class UserService {
   logout() {
     localStorage.removeItem('token');
   }
+  listUser(){
+    return this._http.get<any>(this.env + 'users/listUser');
+   }
+
 }

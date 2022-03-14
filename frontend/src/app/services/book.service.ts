@@ -15,4 +15,17 @@ export class BookService {
   saveBook(book: any) {
     return this._http.post<any>(this.env + 'books/registerBook', book);
   }
+
+  updateBook(book: any) {
+    return this._http.put<any>(this.env + 'books/updateBook', book);
+  }
+
+  deleteBook(book: any) {
+    return this._http.delete<any>(this.env + 'books/delete/' + book._id);
+  }
+
+  listBook() {
+    return this._http.get<any>(this.env + 'books/listBook');
+  }
 }
+

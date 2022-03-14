@@ -13,7 +13,7 @@ bookController.registerBook);
 
 router.get("/listBook", bookController.consultBook);
 router.get("/listBookUser/:_id?", bookController.listBookUser);
-router.put("/delete/:_id", bookController.deleteBook),
+router.delete("/delete/:_id", bookController.deleteBook),
 router.put("/updateBook", bookController.updateBook);
 
 

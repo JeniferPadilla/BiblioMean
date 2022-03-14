@@ -1,3 +1,28 @@
-h1{
-    text-align: center;
+.accordion_display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.accordion_size {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  padding: 50px 16px 0px;
+}
+
+.mat-expansion-panel-header {
+  background-color: #881565;
+}
+
+.spacer {
+  flex: 1 0 auto;
+}
+
+.btnDisponible {
+  background-color: #67cc2c;
+  color: #0e0d0d;
+}
+.btnNoDisponible {
+  background-color: #cc512c;
+  color: #ffffff;
 }

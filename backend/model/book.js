@@ -11,7 +11,7 @@ const bookSchema= new mongoose.Schema({
     deliveryDate:Date,
     user:{type:mongoose.Schema.ObjectId,ref:"users"},
     registerDate:{type:Date, default:Date.now},
-    dbStatus:Boolean,
+    dbStatus:String,
 
 });
 

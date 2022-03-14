@@ -20,7 +20,7 @@ const registerBook = async (req, res) => {
     quantity: req.body.quantity,
     deliveryDate: req.body.deliveryDate,
     user: req.user._id,
-    dbStatus: true,
+    dbStatus: "true",
   });
     const result = await schemaBook.save();
 
@@ -45,12 +45,7 @@ const listBookUser = async (req, res) => {
 };
 
 const deleteBook = async (req, res) => {
-  if (!req.params["_id"])
-    return res.status(400).send({ message: "Incomplete data" });
-
-  const books = await book.findByIdAndUpdate(req.params["_id"], {
-    dbStatus: false,
-  });
+  const books = await book.findByIdAndDelete({_id:req.params["_id"]});
 
   return !books
     ? res.status(400).send({ message: "Error deliting book" })
@@ -65,7 +60,8 @@ const updateBook = async (req, res) => {
     !req.body.category ||
     !req.body.description ||
     !req.body.quantity ||
-    !req.body.deliveryDate
+    !req.body.deliveryDate ||
+     !req.body.dbStatus
   )
     return res.status(400).send({ message: "Incomplete data" });
 
@@ -77,6 +73,7 @@ const updateBook = async (req, res) => {
     quantity: req.body.quantity,
     deliveryDate: req.body.deliveryDate,
     user: req.body.user,
+    dbStatus: req.body.dbStatus,
   });
   if (!editBook)
     return res.status(500).send({ message: "Error editing book " });

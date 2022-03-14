@@ -12,10 +12,10 @@ body {
 
 .styleSnackBarError {
   background-color: #d34e4e;
-  color: #fff;
+  color: #080808;
 }
 
 .styleSnackBarSuccesfull {
   background-color: #4ed360;
-  color: #fff;
+  color: #070707;
 }

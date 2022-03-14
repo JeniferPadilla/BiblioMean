@@ -1,1 +1,32 @@
-<p>list-user works!</p>
+<br>
+<div class="container">
+ <h1 >Usuarios</h1>
+ <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Fecha Actual</th>
+        <th scope="col">Estado</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of user ; let cantBook=index ">
+        <th style="text-align:center"  scope="row">{{cantBook+1}}</th>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td>{{user.role.name}}</td>
+        <td>{{user.registerDate}}</td>
+        <td>{{user.dbStatus}}</td>
+        <td><a><img src="https://cdn-icons-png.flaticon.com/512/1040/1040252.png" width="20" height="20"></a></td>
+        <td><a><img src="https://cdn-icons-png.flaticon.com/512/1345/1345874.png" width="20" height="20"></a></td>
+      </tr>
+    </tbody>
+ </table>
+</div>
+

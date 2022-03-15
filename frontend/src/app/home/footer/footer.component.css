@@ -1,19 +1,16 @@
-p{
-    font-size: 20px;
-    color: #5fe22b;
+p {
+  font-size: 20px;
+  color: #5fe22b;
 }
-footer{
+footer {
+  width: 100%;
+  position: absolute;
   background-color: #da508a;
-    color: #070707;
-    position: absolute;
-    bottom: 0;
-    align-self: flex-end;
-    width: 100%;
-    text-align: center;
-
+  text-align: center;
+  color: #070707;
+  bottom: 0;
+  align-self: flex-end;
 }
 .text-muted {
-      color: #080808!important;
-      
-  }
-  
+  color: #080808 !important;
+}

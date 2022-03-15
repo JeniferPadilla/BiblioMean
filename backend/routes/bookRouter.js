@@ -11,7 +11,7 @@ userIdMidd.existingUser,
 userIdMidd.existingBook,
 bookController.registerBook);
 
-router.get("/listBook", bookController.consultBook);
+router.get("/listBook",auth, bookController.consultBook);
 router.get("/listBookUser/:_id?", bookController.listBookUser);
 router.delete("/delete/:_id", bookController.deleteBook),
 router.put("/updateBook", bookController.updateBook);

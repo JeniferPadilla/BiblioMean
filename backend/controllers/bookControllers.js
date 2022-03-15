@@ -22,7 +22,7 @@ const registerBook = async (req, res) => {
     user: req.user._id,
     dbStatus: "true",
   });
-    const result = await schemaBook.save();
+  const result = await schemaBook.save();
 
   return !result
     ? res.status(500).send({ message: "Error to register book" })
@@ -30,14 +30,16 @@ const registerBook = async (req, res) => {
 };
 
 const consultBook = async (req, res) => {
-  let books = await book.find({ name: new RegExp(req.params["name"]) });
+  // let books = await book.find({ name: new RegExp(req.params["name"]) });
+  const books = await book.find({ user: req.params["_id"] });
+
   if (books.length == 0)
     return res.status(500).send({ message: "no search results" });
   return res.status(200).send({ books });
 };
 
 const listBookUser = async (req, res) => {
-  let books = await book.find({ user: req.params["_id"] });
+  const books = await book.find({ user: req.params["_id"] });
 
   if (books.length == 0)
     return res.status(500).send({ message: "no search results" });
@@ -45,7 +47,7 @@ const listBookUser = async (req, res) => {
 };
 
 const deleteBook = async (req, res) => {
-  const books = await book.findByIdAndDelete({_id:req.params["_id"]});
+  const books = await book.findByIdAndDelete({ _id: req.params["_id"] });
 
   return !books
     ? res.status(400).send({ message: "Error deliting book" })
@@ -61,7 +63,7 @@ const updateBook = async (req, res) => {
     !req.body.description ||
     !req.body.quantity ||
     !req.body.deliveryDate ||
-     !req.body.dbStatus
+    !req.body.dbStatus
   )
     return res.status(400).send({ message: "Incomplete data" });
 

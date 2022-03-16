@@ -2,8 +2,8 @@ import user from "../model/user.js";
 import book from "../model/book.js";
 
 const existingUser = async (req, res, next) => {
-  // const userId = await user.find({user: (req.params["_id"])});
-  const userId = await user.findOne({ _id: req.user._id });
+  const userId = await user.find({user: (req.params["_id"])});
+  // const userId = await user.findOne({ _id: req.user._id });
 
   if (!userId) return res.status(500).send({ message: "user does not exist" });
 
